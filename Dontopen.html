@@ -1,0 +1,2514 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+        content="دليل تعليمي تفاعلي يشرح كيفية رفع موقعك على GitHub وربطه بمنصة Vercel ونشره مجاناً دون استخدام Terminal أو سطر الأوامر.">
+
+    <meta name="author" content="Nasrallah Dahman">
+
+    <title>دليلك لنشر موقعك | نصر الله دهمان</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+
+        /* =========================================
+           1. GENERAL SETTINGS
+        ========================================= */
+
+        :root {
+            --bg: #080b18;
+            --bg2: #0d1225;
+            --card: #111a30;
+            --primary: #7965ff;
+            --secondary: #24c8ff;
+            --green: #35e6a0;
+            --text: #ffffff;
+            --muted: #a1abc2;
+            --border: rgba(255,255,255,0.09);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 90px;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.8;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button {
+            font-family: inherit;
+        }
+
+        .container {
+            width: min(1150px, 90%);
+            margin: auto;
+        }
+
+        .section {
+            padding: 110px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 55px;
+        }
+
+        .section-title .label {
+            color: var(--secondary);
+            font-size: 14px;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        .section-title h2 {
+            font-size: clamp(27px, 4vw, 42px);
+            margin: 12px 0;
+            font-weight: 900;
+        }
+
+        .section-title p {
+            color: var(--muted);
+            max-width: 650px;
+            margin: auto;
+            font-size: 15px;
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, #a48bff, #24c8ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+
+        /* =========================================
+           2. NAVIGATION
+        ========================================= */
+
+        header {
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 0;
+            z-index: 1000;
+            background: rgba(8,11,24,0.82);
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        nav {
+            height: 76px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 900;
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            font-size: 14px;
+            transition: .3s;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        .nav-btn {
+            background: var(--primary);
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 800;
+            transition: .3s;
+        }
+
+        .nav-btn:hover {
+            background: #9484ff;
+            transform: translateY(-3px);
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 24px;
+            background: none;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+
+        /* =========================================
+           3. HERO SECTION
+        ========================================= */
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 100px;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: var(--primary);
+            filter: blur(170px);
+            opacity: .19;
+            top: -150px;
+            right: -150px;
+            pointer-events: none;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: var(--secondary);
+            filter: blur(170px);
+            opacity: .13;
+            bottom: -150px;
+            left: -100px;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            padding: 9px 18px;
+            background: rgba(121,101,255,.12);
+            border: 1px solid rgba(121,101,255,.3);
+            border-radius: 50px;
+            color: #b8aaff;
+            font-size: 13px;
+            margin-bottom: 30px;
+        }
+
+        .hero-badge i {
+            color: var(--green);
+        }
+
+        .hero h1 {
+            font-size: clamp(35px, 6vw, 68px);
+            line-height: 1.5;
+            font-weight: 900;
+            margin-bottom: 20px;
+        }
+
+        .hero-description {
+            max-width: 700px;
+            margin: auto;
+            color: var(--muted);
+            font-size: clamp(14px, 2vw, 18px);
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 38px;
+        }
+
+        .btn {
+            padding: 14px 27px;
+            border-radius: 12px;
+            font-weight: 800;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: .3s;
+            cursor: pointer;
+            border: none;
+            font-size: 14px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(120deg, #7965ff, #5c9dff);
+            color: white;
+            box-shadow: 0 10px 35px rgba(121,101,255,.25);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(121,101,255,.4);
+        }
+
+        .btn-outline {
+            border: 1px solid var(--border);
+            background: rgba(255,255,255,.04);
+            color: white;
+        }
+
+        .btn-outline:hover {
+            background: rgba(255,255,255,.1);
+            transform: translateY(-5px);
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin-top: 65px;
+            flex-wrap: wrap;
+        }
+
+        .stat h3 {
+            font-size: 27px;
+            color: var(--secondary);
+        }
+
+        .stat p {
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .scroll-down {
+            margin-top: 50px;
+            color: var(--muted);
+            animation: float 2s infinite;
+        }
+
+        @keyframes float {
+            0%,100% { transform: translateY(0); }
+            50% { transform: translateY(10px); }
+        }
+
+
+        /* =========================================
+           4. INTRODUCTION
+        ========================================= */
+
+        .intro {
+            background: var(--bg2);
+        }
+
+        .platforms {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        .platform-card {
+            padding: 35px;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            background: linear-gradient(145deg, #131d35, #0d1427);
+            transition: .4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .platform-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(121,101,255,.5);
+        }
+
+        .platform-icon {
+            width: 65px;
+            height: 65px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 17px;
+            font-size: 30px;
+            margin-bottom: 20px;
+            background: rgba(255,255,255,.08);
+        }
+
+        .github-icon {
+            color: white;
+        }
+
+        .vercel-icon {
+            color: var(--secondary);
+        }
+
+        .platform-card h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .platform-card p {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .platform-card ul {
+            margin-top: 20px;
+            list-style: none;
+        }
+
+        .platform-card li {
+            font-size: 13px;
+            margin: 10px 0;
+            color: #d7deed;
+        }
+
+        .platform-card li i {
+            color: var(--green);
+            margin-left: 9px;
+        }
+
+        .connection {
+            margin: 35px auto 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            color: var(--secondary);
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .connection-line {
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            position: relative;
+        }
+
+        .connection-line::after {
+            content: "";
+            position: absolute;
+            width: 9px;
+            height: 9px;
+            background: white;
+            border-radius: 50%;
+            top: -4px;
+            animation: moveDot 2s infinite linear;
+        }
+
+        @keyframes moveDot {
+            from { right: 0; }
+            to { right: 100%; }
+        }
+
+
+        /* =========================================
+           5. STEPS SECTION
+        ========================================= */
+
+        .steps-wrapper {
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .progress-box {
+            background: var(--card);
+            padding: 22px;
+            border-radius: 15px;
+            border: 1px solid var(--border);
+            margin-bottom: 35px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            margin-bottom: 12px;
+            color: var(--muted);
+        }
+
+        .progress-info strong {
+            color: var(--secondary);
+        }
+
+        .progress-track {
+            height: 8px;
+            background: #263149;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transition: .5s;
+            border-radius: 20px;
+        }
+
+        .step-card {
+            border: 1px solid var(--border);
+            background: linear-gradient(140deg, #121b31, #0c1426);
+            border-radius: 18px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            transition: .3s;
+        }
+
+        .step-card:hover {
+            border-color: rgba(36,200,255,.4);
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            padding: 25px;
+            cursor: pointer;
+        }
+
+        .step-number {
+            min-width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            background: rgba(121,101,255,.15);
+            color: #a999ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 900;
+            font-size: 18px;
+        }
+
+        .step-card.completed .step-number {
+            background: rgba(53,230,160,.15);
+            color: var(--green);
+        }
+
+        .step-heading {
+            flex: 1;
+        }
+
+        .step-heading h3 {
+            font-size: 17px;
+        }
+
+        .step-heading p {
+            color: var(--muted);
+            font-size: 12px;
+            margin-top: 3px;
+        }
+
+        .step-arrow {
+            color: var(--muted);
+            transition: .3s;
+        }
+
+        .step-card.active .step-arrow {
+            transform: rotate(180deg);
+            color: var(--secondary);
+        }
+
+        .step-content {
+            display: none;
+            padding: 0 25px 30px;
+            border-top: 1px solid var(--border);
+            animation: slideDown .4s;
+        }
+
+        .step-card.active .step-content {
+            display: block;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .step-content h4 {
+            color: var(--secondary);
+            margin: 22px 0 12px;
+            font-size: 15px;
+        }
+
+        .step-content p {
+            font-size: 14px;
+            color: #c2cce0;
+            margin-bottom: 12px;
+        }
+
+        .step-content ol {
+            padding-right: 22px;
+            color: #d6deef;
+        }
+
+        .step-content ol li {
+            margin-bottom: 13px;
+            font-size: 14px;
+            padding-right: 5px;
+        }
+
+        .step-content ol li::marker {
+            color: var(--secondary);
+            font-weight: bold;
+        }
+
+        .highlight {
+            color: #9e8aff;
+            font-weight: bold;
+        }
+
+        .tip-box {
+            padding: 16px;
+            border-radius: 12px;
+            background: rgba(36,200,255,.07);
+            border-right: 3px solid var(--secondary);
+            margin-top: 20px;
+            color: #c6eaff;
+            font-size: 13px;
+        }
+
+        .tip-box i {
+            margin-left: 8px;
+            color: var(--secondary);
+        }
+
+        .step-image {
+            width: 100%;
+            max-height: 330px;
+            object-fit: cover;
+            border-radius: 13px;
+            margin: 18px 0;
+            border: 1px solid var(--border);
+        }
+
+        .step-actions {
+            margin-top: 25px;
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .small-btn {
+            padding: 11px 18px;
+            font-size: 12px;
+            border-radius: 9px;
+            cursor: pointer;
+            font-weight: bold;
+            border: none;
+            transition: .3s;
+        }
+
+        .complete-btn {
+            background: var(--green);
+            color: #071b16;
+        }
+
+        .complete-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(53,230,160,.2);
+        }
+
+        .next-btn {
+            background: rgba(121,101,255,.2);
+            color: white;
+            border: 1px solid rgba(121,101,255,.3);
+        }
+
+        .next-btn:hover {
+            background: var(--primary);
+        }
+
+
+        /* =========================================
+           6. FINAL SUCCESS SECTION
+        ========================================= */
+
+        .success-section {
+            background: var(--bg2);
+        }
+
+        .success-card {
+            max-width: 850px;
+            margin: auto;
+            padding: 55px 30px;
+            text-align: center;
+            border-radius: 25px;
+            border: 1px solid rgba(53,230,160,.2);
+            background:
+                radial-gradient(circle at top, rgba(53,230,160,.12), transparent 65%),
+                #111a30;
+        }
+
+        .success-icon {
+            font-size: 65px;
+            color: var(--green);
+            margin-bottom: 20px;
+        }
+
+        .success-card h2 {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .success-card p {
+            color: var(--muted);
+            max-width: 600px;
+            margin: auto;
+            font-size: 14px;
+        }
+
+        .success-card .btn {
+            margin-top: 25px;
+        }
+
+
+        /* =========================================
+           7. FAQ SECTION
+        ========================================= */
+
+        .faq-wrapper {
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .faq-item {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 13px;
+            margin-bottom: 13px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: right;
+            background: none;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            gap: 15px;
+        }
+
+        .faq-question i {
+            color: var(--secondary);
+            transition: .3s;
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            display: none;
+            padding: 0 20px 20px;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+            animation: slideDown .3s;
+        }
+
+
+        /* =========================================
+           8. FOOTER
+        ========================================= */
+
+        footer {
+            background: #060914;
+            padding: 60px 0 25px;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 25px;
+        }
+
+        .footer-brand h3 {
+            font-size: 23px;
+            font-weight: 900;
+        }
+
+        .footer-brand p {
+            color: var(--muted);
+            font-size: 12px;
+            margin-top: 8px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-links a {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(255,255,255,.06);
+            color: white;
+            transition: .3s;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            border-top: 1px solid var(--border);
+            margin-top: 40px;
+            padding-top: 20px;
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .copyright span {
+            color: var(--secondary);
+        }
+
+
+        /* =========================================
+           9. BACK TO TOP
+        ========================================= */
+
+        .back-top {
+            position: fixed;
+            bottom: 25px;
+            left: 25px;
+            width: 48px;
+            height: 48px;
+            border: none;
+            border-radius: 13px;
+            background: var(--primary);
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            z-index: 100;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(15px);
+            transition: .3s;
+        }
+
+        .back-top.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+
+        /* =========================================
+           10. TOAST NOTIFICATION
+        ========================================= */
+
+        .toast {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: #14243b;
+            border: 1px solid rgba(53,230,160,.3);
+            color: white;
+            padding: 15px 22px;
+            border-radius: 12px;
+            z-index: 2000;
+            font-size: 13px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: .3s;
+        }
+
+        .toast.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+
+        /* =========================================
+           11. RESPONSIVE DESIGN
+        ========================================= */
+
+        @media(max-width: 768px) {
+
+            .section {
+                padding: 75px 0;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: 76px;
+                right: 0;
+                left: 0;
+                background: #0d1427;
+                display: none;
+                flex-direction: column;
+                align-items: stretch;
+                padding: 25px;
+                gap: 18px;
+                border-bottom: 1px solid var(--border);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-btn {
+                text-align: center;
+            }
+
+            .platforms {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-stats {
+                gap: 25px;
+            }
+
+            .step-header {
+                padding: 18px;
+                gap: 12px;
+            }
+
+            .step-content {
+                padding: 0 18px 25px;
+            }
+
+            .step-heading h3 {
+                font-size: 14px;
+            }
+
+            .step-heading p {
+                font-size: 11px;
+            }
+
+            .step-number {
+                min-width: 40px;
+                height: 40px;
+                font-size: 15px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .success-card h2 {
+                font-size: 25px;
+            }
+        }
+
+        @media(max-width: 400px) {
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .hero-buttons .btn {
+                width: 100%;
+            }
+
+            .step-actions {
+                flex-direction: column;
+            }
+
+            .step-actions button {
+                width: 100%;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================================
+         NAVIGATION BAR
+    ========================================= -->
+
+    <header>
+
+        <div class="container">
+
+            <nav>
+
+                <a href="#" class="logo">
+                    نصر الله <span>دهمان.</span>
+                </a>
+
+                <button class="menu-toggle" id="menuToggle"
+                    aria-label="فتح القائمة" aria-expanded="false">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <div class="nav-links" id="navLinks">
+
+                    <a href="#home">الرئيسية</a>
+
+                    <a href="#intro">المقدمة</a>
+
+                    <a href="#steps">الخطوات</a>
+
+                    <a href="#faq">الأسئلة الشائعة</a>
+
+                    <a href="#footer" class="nav-btn">
+                        تواصل معي
+                    </a>
+
+                </div>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =========================================
+         HERO SECTION
+    ========================================= -->
+
+    <section class="hero" id="home">
+
+        <div class="container">
+
+            <div class="hero-content" data-aos="fade-up">
+
+                <div class="hero-badge">
+
+                    <i class="fas fa-circle-check"></i>
+
+                    دليل تعليمي مجاني • بدون Terminal
+
+                </div>
+
+
+                <h1>
+
+                    انشر موقعك على الإنترنت
+
+                    <br>
+
+                    <span class="gradient-text">
+                        بخطوات بسيطة وبدون برمجة معقدة
+                    </span>
+
+                </h1>
+
+
+                <p class="hero-description">
+
+                    أهلاً بك! أنا نصر الله دهمان.
+
+                    في هذا الدليل سأرافقك خطوة بخطوة لتتعلم كيفية رفع
+                    موقعك الإلكتروني على GitHub وربطه بمنصة Vercel
+                    ونشره للعالم، باستخدام المتصفح فقط ودون كتابة
+                    أي أمر في سطر الأوامر.
+
+                </p>
+
+
+                <div class="hero-buttons">
+
+                    <a href="#steps" class="btn btn-primary">
+
+                        ابدأ رحلتك الآن
+
+                        <i class="fas fa-arrow-left"></i>
+
+                    </a>
+
+
+                    <a href="#intro" class="btn btn-outline">
+
+                        اكتشف طريقة العمل
+
+                        <i class="fas fa-play-circle"></i>
+
+                    </a>
+
+                </div>
+
+
+                <div class="hero-stats">
+
+                    <div class="stat">
+
+                        <h3>04</h3>
+
+                        <p>خطوات بسيطة</p>
+
+                    </div>
+
+                    <div class="stat">
+
+                        <h3>100%</h3>
+
+                        <p>عبر الواجهة الرسومية</p>
+
+                    </div>
+
+                    <div class="stat">
+
+                        <h3>0</h3>
+
+                        <p>أوامر Terminal</p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="scroll-down">
+
+                    <i class="fas fa-chevron-down"></i>
+
+                    <p>اكتشف المزيد</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================
+         INTRODUCTION SECTION
+    ========================================= -->
+
+    <section class="section intro" id="intro">
+
+        <div class="container">
+
+            <div class="section-title" data-aos="fade-up">
+
+                <span class="label">تعرف على الأدوات</span>
+
+                <h2>
+                    لماذا نستخدم
+                    <span class="gradient-text">GitHub و Vercel؟</span>
+                </h2>
+
+                <p>
+                    منصتان تعملان معاً لتسهيل إدارة موقعك الإلكتروني
+                    ونشره على الإنترنت دون الحاجة إلى خادم خاص.
+                </p>
+
+            </div>
+
+
+            <div class="platforms">
+
+                <!-- GitHub -->
+
+                <div class="platform-card" data-aos="fade-left">
+
+                    <div class="platform-icon github-icon">
+
+                        <i class="fab fa-github"></i>
+
+                    </div>
+
+                    <h3>GitHub</h3>
+
+                    <p>
+                        منصة لحفظ وإدارة ملفات مشروعك البرمجي
+                        عبر الإنترنت، باستخدام المستودعات
+                        (Repositories).
+                    </p>
+
+                    <ul>
+
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            حفظ ملفات موقعك بأمان.
+                        </li>
+
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            رفع الملفات من المتصفح مباشرة.
+                        </li>
+
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            تتبع التعديلات والتحديثات.
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <!-- Vercel -->
+
+                <div class="platform-card" data-aos="fade-right">
+
+                    <div class="platform-icon vercel-icon">
+
+                        <i class="fas fa-triangle-exclamation"></i>
+
+                    </div>
+
+                    <h3>Vercel</h3>
+
+                    <p>
+                        منصة استضافة حديثة تحول ملفات مشروعك
+                        إلى موقع إلكتروني متاح للجميع عبر رابط مباشر.
+                    </p>
+
+                    <ul>
+
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            نشر موقعك بسهولة.
+                        </li>
+
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            الحصول على رابط مجاني.
+                        </li>
+
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            تحديث الموقع تلقائياً عند تحديث GitHub.
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+
+            <div class="connection" data-aos="zoom-in">
+
+                <span>GitHub</span>
+
+                <div class="connection-line"></div>
+
+                <span>Vercel</span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================
+         STEP BY STEP GUIDE
+    ========================================= -->
+
+    <section class="section" id="steps">
+
+        <div class="container">
+
+            <div class="section-title" data-aos="fade-up">
+
+                <span class="label">لنبدأ التطبيق العملي</span>
+
+                <h2>
+                    رحلتك نحو نشر موقعك
+                    <span class="gradient-text">في 4 خطوات</span>
+                </h2>
+
+                <p>
+                    اتبع التعليمات التالية بالترتيب.
+                    افتح كل خطوة ونفذ المطلوب ثم اضغط على زر إكمال الخطوة.
+                </p>
+
+            </div>
+
+
+            <div class="steps-wrapper">
+
+
+                <!-- PROGRESS -->
+
+                <div class="progress-box">
+
+                    <div class="progress-info">
+
+                        <span>نسبة إنجاز الدليل</span>
+
+                        <strong id="progressText">0% مكتمل</strong>
+
+                    </div>
+
+                    <div class="progress-track">
+
+                        <div class="progress-fill" id="progressFill"></div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- STEP 1 -->
+
+                <div class="step-card active" id="step1" data-aos="fade-up">
+
+                    <div class="step-header" onclick="toggleStep(1)">
+
+                        <div class="step-number">01</div>
+
+                        <div class="step-heading">
+
+                            <h3>رفع ملفات موقعك إلى GitHub</h3>
+
+                            <p>تجهيز المشروع وإنشاء Repository ورفع الملفات</p>
+
+                        </div>
+
+                        <i class="fas fa-chevron-down step-arrow"></i>
+
+                    </div>
+
+
+                    <div class="step-content">
+
+                        <h4>
+                            <i class="fab fa-github"></i>
+                            أولاً: الدخول إلى GitHub
+                        </h4>
+
+                        <ol>
+
+                            <li>
+                                افتح موقع
+                                <a href="https://github.com" target="_blank"
+                                    class="highlight">GitHub.com</a>.
+                            </li>
+
+                            <li>
+                                سجل الدخول إلى حسابك، أو أنشئ حساباً جديداً
+                إذا لم يكن لديك حساب.
+                            </li>
+
+                            <li>
+                                بعد تسجيل الدخول، اضغط على علامة (+)
+                                الموجودة أعلى الصفحة.
+                            </li>
+
+                            <li>
+                                اختر
+                                <span class="highlight">New repository</span>
+                                لإنشاء مستودع جديد.
+                            </li>
+
+                        </ol>
+
+
+                        <h4>ثانياً: إنشاء المستودع</h4>
+
+                        <ol>
+
+                            <li>
+                                اكتب اسماً للمشروع، مثلاً:
+                                <span class="highlight">my-first-website</span>.
+                            </li>
+
+                            <li>
+                                اختر Public حتى يكون المستودع متاحاً
+                                للاستيراد بسهولة.
+                            </li>
+
+                            <li>
+                                يمكنك تفعيل خيار Add a README file
+                                إن رغبت.
+                            </li>
+
+                            <li>
+                                اضغط على زر
+                                <span class="highlight">Create repository</span>.
+                            </li>
+
+                        </ol>
+
+
+                        <h4>ثالثاً: رفع ملفات الموقع Drag & Drop</h4>
+
+                        <ol>
+
+                            <li>
+                                افتح المستودع الذي أنشأته.
+                            </li>
+
+                            <li>
+                                اضغط على
+                                <span class="highlight">Add file</span>.
+                            </li>
+
+                            <li>
+                                اختر
+                                <span class="highlight">Upload files</span>.
+                            </li>
+
+                            <li>
+                                اسحب ملفات موقعك من جهازك وأفلتها
+                                داخل منطقة رفع الملفات.
+                            </li>
+
+                            <li>
+                                تأكد من وجود ملف
+                                <span class="highlight">index.html</span>
+                                في المجلد الرئيسي للمشروع.
+                            </li>
+
+                            <li>
+                                انتظر اكتمال الرفع، ثم انزل إلى الأسفل
+                                واضغط على
+                                <span class="highlight">Commit changes</span>.
+                            </li>
+
+                        </ol>
+
+
+                        <div class="tip-box">
+
+                            <i class="fas fa-lightbulb"></i>
+
+                            <strong>نصيحة مهمة:</strong>
+
+                            يجب أن يكون ملف index.html في جذر المستودع
+                            (Root Directory)، وليس داخل مجلد فرعي،
+                            حتى يسهل على Vercel اكتشاف الصفحة الرئيسية.
+
+                        </div>
+
+
+                        <div class="step-actions">
+
+                            <a href="https://github.com/new"
+                                target="_blank"
+                                class="small-btn next-btn">
+
+                                <i class="fas fa-external-link-alt"></i>
+
+                                إنشاء مستودع GitHub
+
+                            </a>
+
+                            <button class="small-btn complete-btn"
+                                onclick="completeStep(1)">
+
+                                <i class="fas fa-check"></i>
+
+                                أكملت هذه الخطوة
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- STEP 2 -->
+
+                <div class="step-card" id="step2" data-aos="fade-up">
+
+                    <div class="step-header" onclick="toggleStep(2)">
+
+                        <div class="step-number">02</div>
+
+                        <div class="step-heading">
+
+                            <h3>إنشاء حساب على Vercel</h3>
+
+                            <p>الدخول إلى منصة الاستضافة وتجهيز حسابك</p>
+
+                        </div>
+
+                        <i class="fas fa-chevron-down step-arrow"></i>
+
+                    </div>
+
+
+                    <div class="step-content">
+
+                        <h4>
+                            <i class="fas fa-globe"></i>
+                            الدخول إلى منصة Vercel
+                        </h4>
+
+                        <ol>
+
+                            <li>
+                                افتح الموقع الرسمي:
+                                <a href="https://vercel.com"
+                                    target="_blank"
+                                    class="highlight">Vercel.com</a>.
+                            </li>
+
+                            <li>
+                                اضغط على
+                                <span class="highlight">Sign Up</span>
+                                لإنشاء حساب جديد.
+                            </li>
+
+                            <li>
+                                ستظهر لك خيارات التسجيل المختلفة.
+                            </li>
+
+                            <li>
+                                اختر
+                                <span class="highlight">Continue with GitHub</span>
+                                لتسجيل الدخول باستخدام حساب GitHub.
+                            </li>
+
+                            <li>
+                                إذا ظهرت نافذة تفويض الصلاحيات،
+                                راجعها ثم وافق على ربط الحساب.
+                            </li>
+
+                        </ol>
+
+
+                        <div class="tip-box">
+
+                            <i class="fas fa-shield-alt"></i>
+
+                            <strong>معلومة:</strong>
+
+                            يفضل استخدام حساب GitHub نفسه الذي رفعت
+                            إليه ملفات موقعك لتسهيل عملية الربط والاستيراد.
+
+                        </div>
+
+
+                        <div class="step-actions">
+
+                            <a href="https://vercel.com/signup"
+                                target="_blank"
+                                class="small-btn next-btn">
+
+                                <i class="fas fa-external-link-alt"></i>
+
+                                إنشاء حساب Vercel
+
+                            </a>
+
+                            <button class="small-btn complete-btn"
+                                onclick="completeStep(2)">
+
+                                <i class="fas fa-check"></i>
+
+                                أكملت هذه الخطوة
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- STEP 3 -->
+
+                <div class="step-card" id="step3" data-aos="fade-up">
+
+                    <div class="step-header" onclick="toggleStep(3)">
+
+                        <div class="step-number">03</div>
+
+                        <div class="step-heading">
+
+                            <h3>ربط GitHub مع Vercel واستيراد المشروع</h3>
+
+                            <p>اختيار المستودع وربطه بمنصة الاستضافة</p>
+
+                        </div>
+
+                        <i class="fas fa-chevron-down step-arrow"></i>
+
+                    </div>
+
+
+                    <div class="step-content">
+
+                        <h4>استيراد المشروع</h4>
+
+                        <ol>
+
+                            <li>
+                                بعد تسجيل الدخول إلى Vercel،
+                                ستظهر لك لوحة التحكم.
+                            </li>
+
+                            <li>
+                                اضغط على
+                                <span class="highlight">Add New...</span>.
+                            </li>
+
+                            <li>
+                                اختر
+                                <span class="highlight">Project</span>.
+                            </li>
+
+                            <li>
+                                ستظهر لك صفحة استيراد المستودعات
+                                من GitHub.
+                            </li>
+
+                            <li>
+                                ابحث عن اسم المستودع الذي أنشأته
+                                في الخطوة الأولى.
+                            </li>
+
+                            <li>
+                                اضغط على
+                                <span class="highlight">Import</span>
+                                بجانب المشروع المطلوب.
+                            </li>
+
+                        </ol>
+
+
+                        <h4>ضبط إعدادات المشروع</h4>
+
+                        <ol>
+
+                            <li>
+                                اكتب اسماً مناسباً لمشروعك في
+                                Project Name.
+                            </li>
+
+                            <li>
+                                إذا كان موقعك عبارة عن HTML وCSS وJavaScript
+                                عادي، اختر Other في Framework Preset
+                                إذا لم يتم اكتشافه تلقائياً.
+                            </li>
+
+                            <li>
+                                تأكد من أن Root Directory يشير إلى
+                                المجلد الذي يحتوي على index.html.
+                            </li>
+
+                            <li>
+                                اترك إعدادات Build and Output Directory
+                                الافتراضية لمشروع HTML ثابت بسيط،
+                                ما لم تكن لديك إعدادات خاصة.
+                            </li>
+
+                        </ol>
+
+
+                        <div class="tip-box">
+
+                            <i class="fas fa-info-circle"></i>
+
+                            <strong>تنبيه:</strong>
+
+                            إذا كان مشروعك مبنياً باستخدام React أو
+                            Next.js أو إطار عمل آخر، فقد تحتاج إلى
+                            إعدادات مختلفة عن مشروع HTML العادي.
+
+                        </div>
+
+
+                        <div class="step-actions">
+
+                            <a href="https://vercel.com/new"
+                                target="_blank"
+                                class="small-btn next-btn">
+
+                                <i class="fas fa-external-link-alt"></i>
+
+                                استيراد مشروع جديد
+
+                            </a>
+
+                            <button class="small-btn complete-btn"
+                                onclick="completeStep(3)">
+
+                                <i class="fas fa-check"></i>
+
+                                أكملت هذه الخطوة
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- STEP 4 -->
+
+                <div class="step-card" id="step4" data-aos="fade-up">
+
+                    <div class="step-header" onclick="toggleStep(4)">
+
+                        <div class="step-number">04</div>
+
+                        <div class="step-heading">
+
+                            <h3>نشر الموقع والحصول على الرابط النهائي</h3>
+
+                            <p>إطلاق مشروعك على الإنترنت بنجاح</p>
+
+                        </div>
+
+                        <i class="fas fa-chevron-down step-arrow"></i>
+
+                    </div>
+
+
+                    <div class="step-content">
+
+                        <h4>تنفيذ عملية النشر Deploy</h4>
+
+                        <ol>
+
+                            <li>
+                                راجع الإعدادات التي اخترتها في الخطوة السابقة.
+                            </li>
+
+                            <li>
+                                اضغط على زر
+                                <span class="highlight">Deploy</span>.
+                            </li>
+
+                            <li>
+                                ستبدأ Vercel في تجهيز موقعك ونشره.
+                            </li>
+
+                            <li>
+                                انتظر حتى تنتهي عملية البناء والنشر بنجاح.
+                            </li>
+
+                            <li>
+                                ستظهر لك رسالة نجاح مع رابط الموقع.
+                            </li>
+
+                            <li>
+                                اضغط على
+                                <span class="highlight">Visit</span>
+                                لفتح موقعك الإلكتروني الجديد.
+                            </li>
+
+                        </ol>
+
+
+                        <h4>ماذا بعد النشر؟</h4>
+
+                        <p>
+                            من أهم مميزات ربط GitHub بـ Vercel أن عملية
+                            النشر يمكن أن تصبح تلقائية.
+                        </p>
+
+                        <p>
+                            عندما تعدل ملفات موقعك وترفع التغييرات
+                            إلى الفرع المرتبط بالنشر، ستكتشف Vercel
+                            التغييرات وتبدأ عملية نشر جديدة تلقائياً.
+                        </p>
+
+
+                        <div class="tip-box">
+
+                            <i class="fas fa-rocket"></i>
+
+                            <strong>مبروك!</strong>
+
+                            أصبح موقعك متاحاً على الإنترنت.
+                            يمكنك مشاركة رابطه مع أصدقائك أو عملائك
+                            من أي مكان في العالم.
+
+                        </div>
+
+
+                        <div class="step-actions">
+
+                            <a href="https://vercel.com/dashboard"
+                                target="_blank"
+                                class="small-btn next-btn">
+
+                                <i class="fas fa-external-link-alt"></i>
+
+                                فتح لوحة التحكم
+
+                            </a>
+
+                            <button class="small-btn complete-btn"
+                                onclick="completeStep(4)">
+
+                                <i class="fas fa-check"></i>
+
+                                أكملت هذه الخطوة
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================
+         SUCCESS SECTION
+    ========================================= -->
+
+    <section class="section success-section">
+
+        <div class="container">
+
+            <div class="success-card" data-aos="zoom-in">
+
+                <div class="success-icon">
+
+                    <i class="fas fa-trophy"></i>
+
+                </div>
+
+                <h2>
+
+                    حان وقت إطلاق مشروعك!
+
+                </h2>
+
+                <p>
+
+                    لقد تعلمت الآن كيفية رفع ملفات موقعك إلى GitHub
+                    وربطها بمنصة Vercel ونشرها للعالم دون استخدام
+                    Terminal أو كتابة أوامر برمجية.
+
+                    استمر في التعلم والتطوير، فكل مشروع جديد
+                    هو فرصة لاكتساب خبرة أكبر.
+
+                </p>
+
+                <a href="https://vercel.com/dashboard"
+                    target="_blank"
+                    class="btn btn-primary">
+
+                    <i class="fas fa-rocket"></i>
+
+                    انطلق إلى Vercel
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================
+         FAQ SECTION
+    ========================================= -->
+
+    <section class="section" id="faq">
+
+        <div class="container">
+
+            <div class="section-title" data-aos="fade-up">
+
+                <span class="label">هل لديك استفسار؟</span>
+
+                <h2>
+
+                    الأسئلة
+                    <span class="gradient-text">الشائعة</span>
+
+                </h2>
+
+                <p>
+
+                    إليك إجابات عن أكثر الأسئلة التي قد تواجهك
+                    أثناء استضافة موقعك.
+
+                </p>
+
+            </div>
+
+
+            <div class="faq-wrapper">
+
+
+                <div class="faq-item">
+
+                    <button class="faq-question">
+
+                        هل يمكنني نشر موقعي مجاناً؟
+
+                        <i class="fas fa-plus"></i>
+
+                    </button>
+
+                    <div class="faq-answer">
+
+                        نعم، توفر Vercel خطة مجانية مناسبة
+                        للمشاريع الشخصية والتجارب التعليمية،
+                        مع وجود حدود استخدام وشروط للخطة المجانية.
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="faq-item">
+
+                    <button class="faq-question">
+
+                        هل أحتاج إلى تثبيت برامج على جهازي؟
+
+                        <i class="fas fa-plus"></i>
+
+                    </button>
+
+                    <div class="faq-answer">
+
+                        لا، يمكنك تنفيذ الخطوات الأساسية المذكورة
+                        في هذا الدليل باستخدام متصفح الإنترنت فقط،
+                        دون تثبيت Git أو استخدام Terminal.
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="faq-item">
+
+                    <button class="faq-question">
+
+                        هل يجب أن أتعلم البرمجة أولاً؟
+
+                        <i class="fas fa-plus"></i>
+
+                    </button>
+
+                    <div class="faq-answer">
+
+                        لا تحتاج إلى خبرة برمجية لتنفيذ خطوات
+                        رفع الملفات وربط الحسابات والنشر.
+                        لكن يجب أن تمتلك ملفات موقع جاهزة للنشر.
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="faq-item">
+
+                    <button class="faq-question">
+
+                        كيف أقوم بتحديث موقعي بعد نشره؟
+
+                        <i class="fas fa-plus"></i>
+
+                    </button>
+
+                    <div class="faq-answer">
+
+                        افتح مستودعك على GitHub، واختر الملف الذي
+                        تريد تعديله، ثم اضغط على أيقونة التعديل
+                        (Edit)، وأدخل التغييرات واحفظها باستخدام
+                        Commit changes.
+
+                        بعد ذلك ستبدأ Vercel عملية نشر جديدة
+                        تلقائياً عند تحديث فرع النشر المرتبط بالمشروع.
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="faq-item">
+
+                    <button class="faq-question">
+
+                        هل يمكنني استخدام دومين خاص؟
+
+                        <i class="fas fa-plus"></i>
+
+                    </button>
+
+                    <div class="faq-answer">
+
+                        نعم، يمكنك ربط نطاق خاص مثل
+                        example.com من خلال إعدادات Domains
+                        داخل مشروعك في Vercel.
+                        قد تحتاج إلى شراء النطاق بشكل منفصل
+                        وضبط سجلات DNS وفق التعليمات المعروضة.
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="faq-item">
+
+                    <button class="faq-question">
+
+                        ماذا أفعل إذا فشلت عملية Deploy؟
+
+                        <i class="fas fa-plus"></i>
+
+                    </button>
+
+                    <div class="faq-answer">
+
+                        افتح صفحة Deployments داخل Vercel،
+                        واختر عملية النشر الفاشلة، ثم راجع
+                        Build Logs لمعرفة سبب المشكلة.
+
+                        تحقق من وجود index.html في المجلد الصحيح
+                        ومن إعدادات المشروع، ثم حاول النشر مجدداً.
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================
+         FOOTER
+    ========================================= -->
+
+    <footer id="footer">
+
+        <div class="container">
+
+            <div class="footer-content">
+
+                <div class="footer-brand">
+
+                    <h3>
+
+                        نصر الله
+                        <span class="gradient-text">دهمان</span>
+
+                    </h3>
+
+                    <p>
+
+                        أشارك المعرفة لتسهيل رحلتك في عالم التقنية.
+
+                    </p>
+
+                </div>
+
+
+                <div class="social-links">
+
+                    <!-- استبدل الروابط التالية بروابط حساباتك الحقيقية -->
+
+                    <a href="https://github.com"
+                        target="_blank"
+                        aria-label="GitHub">
+
+                        <i class="fab fa-github"></i>
+
+                    </a>
+
+
+                    <a href="https://www.facebook.com"
+                        target="_blank"
+                        aria-label="Facebook">
+
+                        <i class="fab fa-facebook-f"></i>
+
+                    </a>
+
+
+                    <a href="https://www.instagram.com"
+                        target="_blank"
+                        aria-label="Instagram">
+
+                        <i class="fab fa-instagram"></i>
+
+                    </a>
+
+
+                    <a href="https://www.linkedin.com"
+                        target="_blank"
+                        aria-label="LinkedIn">
+
+                        <i class="fab fa-linkedin-in"></i>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div class="copyright">
+
+                جميع الحقوق محفوظة ©
+
+                <span>نصر الله دهمان | Nasrallah Dahman</span>
+
+                <br>
+
+                صُنع بكل شغف ❤️ لتبسيط عالم التقنية.
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- BACK TO TOP -->
+
+    <button class="back-top" id="backTop"
+        aria-label="العودة إلى الأعلى">
+
+        <i class="fas fa-arrow-up"></i>
+
+    </button>
+
+
+
+    <!-- TOAST -->
+
+    <div class="toast" id="toast" role="status">
+
+        <i class="fas fa-check-circle"></i>
+
+        تم إنجاز الخطوة بنجاح!
+
+    </div>
+
+
+
+    <!-- =========================================
+         JAVASCRIPT
+    ========================================= -->
+
+    <!-- AOS Library -->
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+
+    <script>
+
+        /* =========================================
+           1. INITIALIZE AOS
+        ========================================= */
+
+        AOS.init({
+
+            duration: 900,
+
+            once: true,
+
+            offset: 70,
+
+            easing: 'ease-out-cubic'
+
+        });
+
+
+
+        /* =========================================
+           2. MOBILE MENU
+        ========================================= */
+
+        const menuToggle = document.getElementById('menuToggle');
+
+        const navLinks = document.getElementById('navLinks');
+
+
+        menuToggle.addEventListener('click', function() {
+
+            navLinks.classList.toggle('active');
+
+            const isOpen = navLinks.classList.contains('active');
+
+            menuToggle.setAttribute('aria-expanded', isOpen);
+
+            menuToggle.innerHTML = isOpen
+                ? '<i class="fas fa-times"></i>'
+                : '<i class="fas fa-bars"></i>';
+
+        });
+
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+
+            link.addEventListener('click', () => {
+
+                navLinks.classList.remove('active');
+
+                menuToggle.setAttribute('aria-expanded', 'false');
+
+                menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+
+            });
+
+        });
+
+
+
+        /* =========================================
+           3. STEP ACCORDION
+        ========================================= */
+
+        function toggleStep(number) {
+
+            const card = document.getElementById('step' + number);
+
+            card.classList.toggle('active');
+
+        }
+
+
+
+        /* =========================================
+           4. STEP COMPLETION
+        ========================================= */
+
+        let completedSteps = new Set();
+
+
+        function completeStep(number) {
+
+            const card = document.getElementById('step' + number);
+
+            if (completedSteps.has(number)) {
+
+                return;
+
+            }
+
+
+            completedSteps.add(number);
+
+            card.classList.add('completed');
+
+
+            // Update the step icon
+
+            const stepNumber = card.querySelector('.step-number');
+
+            stepNumber.innerHTML = '<i class="fas fa-check"></i>';
+
+
+            // Close current step
+
+            card.classList.remove('active');
+
+
+            // Update progress
+
+            updateProgress();
+
+
+            // Show notification
+
+            showToast();
+
+
+            // Open next step
+
+            if (number < 4) {
+
+                setTimeout(() => {
+
+                    const nextCard = document.getElementById('step' + (number + 1));
+
+                    nextCard.classList.add('active');
+
+                    nextCard.scrollIntoView({
+
+                        behavior: 'smooth',
+
+                        block: 'center'
+
+                    });
+
+                }, 500);
+
+            }
+
+        }
+
+
+
+        /* =========================================
+           5. UPDATE PROGRESS BAR
+        ========================================= */
+
+        function updateProgress() {
+
+            const count = completedSteps.size;
+
+            const percentage = (count / 4) * 100;
+
+
+            document.getElementById('progressFill').style.width =
+                percentage + '%';
+
+
+            document.getElementById('progressText').innerText =
+                percentage + '% مكتمل';
+
+
+            if (count === 4) {
+
+                document.getElementById('progressText').innerText =
+                    '100% - اكتمل الدليل!';
+
+
+                setTimeout(() => {
+
+                    document.querySelector('.success-section').scrollIntoView({
+
+                        behavior: 'smooth'
+
+                    });
+
+                }, 800);
+
+            }
+
+        }
+
+
+
+        /* =========================================
+           6. TOAST NOTIFICATION
+        ========================================= */
+
+        function showToast() {
+
+            const toast = document.getElementById('toast');
+
+            toast.classList.add('show');
+
+
+            setTimeout(() => {
+
+                toast.classList.remove('show');
+
+            }, 2500);
+
+        }
+
+
+
+        /* =========================================
+           7. FAQ ACCORDION
+        ========================================= */
+
+        document.querySelectorAll('.faq-question').forEach(button => {
+
+            button.addEventListener('click', function() {
+
+                const item = this.parentElement;
+
+                item.classList.toggle('active');
+
+
+                // Close other questions
+
+                document.querySelectorAll('.faq-item').forEach(other => {
+
+                    if (other !== item) {
+
+                        other.classList.remove('active');
+
+                    }
+
+                });
+
+            });
+
+        });
+
+
+
+        /* =========================================
+           8. BACK TO TOP BUTTON
+        ========================================= */
+
+        const backTop = document.getElementById('backTop');
+
+
+        window.addEventListener('scroll', function() {
+
+            if (window.scrollY > 400) {
+
+                backTop.classList.add('show');
+
+            } else {
+
+                backTop.classList.remove('show');
+
+            }
+
+        });
+
+
+        backTop.addEventListener('click', function() {
+
+            window.scrollTo({
+
+                top: 0,
+
+                behavior: 'smooth'
+
+            });
+
+        });
+
+
+
+        /* =========================================
+           9. SMOOTH ANCHOR SCROLLING
+        ========================================= */
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+
+            anchor.addEventListener('click', function(e) {
+
+                const target = document.querySelector(
+                    this.getAttribute('href')
+                );
+
+                if (target) {
+
+                    e.preventDefault();
+
+                    target.scrollIntoView({
+
+                        behavior: 'smooth'
+
+                    });
+
+                }
+
+            });
+
+        });
+
+
+
+        /* =========================================
+           10. CONSOLE WELCOME
+        ========================================= */
+
+        console.log(
+            'Welcome to Nasrallah Dahman Website Hosting Guide!'
+        );
+
+    </script>
+
+
+</body>
+
+</html>
