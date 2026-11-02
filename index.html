@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نصر الله دهمان | دليل الاستضافة عبر GitHub & Vercel</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Cairo -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        cairo: ['Cairo', 'sans-serif'],
+                    },
+                    colors: {
+                        dark: '#0a0f1d',
+                        card: '#151e32',
+                        accent: '#38bdf8',
+                        vercel: '#000000',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #0a0f1d;
+            color: #f1f5f9;
+            overflow-x: hidden;
+        }
+        /* تأثير الخلفية المتحركة */
+        .bg-glow {
+            background: radial-gradient(circle at 50% 20%, rgba(56, 189, 248, 0.15), transparent 60%),
+                        radial-gradient(circle at 10% 80%, rgba(139, 92, 246, 0.12), transparent 50%);
+        }
+        /* بطاقات زجاجية */
+        .glass-card {
+            background: rgba(21, 30, 50, 0.75);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(56, 189, 248, 0.4);
+            box-shadow: 0 15px 30px -10px rgba(56, 189, 248, 0.2);
+        }
+        /* شريط التمرير */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0f1d;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #38bdf8;
+            border-radius: 4px;
+        }
+        /* تأثير النبض للزر */
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 15px rgba(56, 189, 248, 0.5); }
+            50% { box-shadow: 0 0 30px rgba(56, 189, 248, 0.9); }
+        }
+        .btn-glow {
+            animation: pulse-glow 2.5s infinite;
+        }
+    </style>
+</head>
+<body class="bg-glow min-h-screen relative">
+
+    <!-- شريط التنقل العلوي -->
+    <nav class="fixed top-0 w-full z-50 glass-card border-b border-white/10 px-6 py-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="#" class="text-2xl font-black tracking-wider bg-gradient-to-l from-sky-400 to-purple-500 bg-clip-text text-transparent flex items-center gap-2">
+                <i class="fa-solid fa-code text-sky-400"></i>
+                نصر الله دهمان
+            </a>
+            <div class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-300">
+                <a href="#hero" class="hover:text-sky-400 transition">الرئيسية</a>
+                <a href="#why" class="hover:text-sky-400 transition">لماذا GitHub و Vercel؟</a>
+                <a href="#steps" class="hover:text-sky-400 transition">خطوات الشرح</a>
+                <a href="#simulator" class="hover:text-sky-400 transition">المحاكي التفاعلي</a>
+                <a href="#links" class="hover:text-sky-400 transition">الروابط والأمثلة</a>
+            </div>
+            <a href="#steps" class="bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold px-5 py-2 rounded-full text-sm transition shadow-lg shadow-sky-500/20">
+                ابدأ التعلم الآن
+            </a>
+        </div>
+    </nav>
+
+    <!-- القسم الرئيسي (Hero Section) -->
+    <section id="hero" class="pt-32 pb-20 px-6">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+            <div data-aos="fade-left" data-aos-duration="1000">
+                <span class="inline-block py-1.5 px-4 rounded-full bg-sky-500/10 border border-sky-500/30 text-sky-400 text-sm font-semibold mb-4">
+                    <i class="fa-solid fa-rocket ml-1"></i> مبادرة تعليمية من نصر الله دهمان
+                </span>
+                <h1 class="text-4xl md:text-6xl font-black leading-tight mb-6">
+                    انشر موقعك للعالم <br>
+                    <span class="bg-gradient-to-l from-sky-400 via-blue-500 to-purple-500 bg-clip-text text-transparent">
+                        مجاناً وباحترافية!
+                    </span>
+                </h1>
+                <p class="text-slate-400 text-lg leading-relaxed mb-8">
+                    مرحباً بك في منصتي الشخصية. أنا <strong>نصر الله دهمان</strong>، وسأأخذك في رحلة تفاعلية خطوة بخطوة لتعلم كيفية رفع مشاريعك البرمجية على منصة <strong>GitHub</strong> وربطها بأقوى منصة استضافة سحابية <strong>Vercel</strong> ليصبح موقعك متاحاً للجميع في ثوانٍ.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#steps" class="btn-glow bg-gradient-to-r from-sky-500 to-blue-600 text-white font-bold px-8 py-4 rounded-xl flex items-center gap-3 hover:scale-105 transition">
+                        <span>ابدأ الدليل التفاعلي</span>
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </a>
+                    <a href="#simulator" class="glass-card text-white font-semibold px-7 py-4 rounded-xl flex items-center gap-3 hover:bg-white/10 transition">
+                        <i class="fa-solid fa-terminal text-sky-400"></i>
+                        <span>جرب المحاكي المباشر</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="relative" data-aos="zoom-in" data-aos-duration="1000">
+                <div class="absolute -inset-2 bg-gradient-to-r from-sky-500 to-purple-600 rounded-2xl blur-xl opacity-30 animate-pulse"></div>
+                <div class="relative glass-card rounded-2xl overflow-hidden p-3 border border-white/15">
+                    <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1000&q=80" alt="برمجة واستضافة" class="rounded-xl w-full h-80 object-cover">
+                    <div class="p-4 flex items-center justify-between bg-slate-900/90 rounded-b-xl mt-2">
+                        <div class="flex items-center gap-3">
+                            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" alt="نصر الله دهمان" class="w-12 h-12 rounded-full border-2 border-sky-400 object-cover">
+                            <div>
+                                <h4 class="font-bold text-white text-sm">نصر الله دهمان</h4>
+                                <p class="text-xs text-sky-400">مطور واجهات ومهتم بالتقنية</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-3 text-xl">
+                            <i class="fa-brands fa-github text-white hover:text-sky-400 cursor-pointer transition"></i>
+                            <i class="fa-solid fa-square-caret-up text-white hover:text-sky-400 cursor-pointer transition" title="Vercel"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- لماذا GitHub و Vercel؟ -->
+    <section id="why" class="py-16 px-6 bg-slate-900/40">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center max-w-2xl mx-auto mb-16" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-black mb-4">لماذا هذا الثنائي هو الأفضل؟</h2>
+                <p class="text-slate-400">يعتمد ملايين المطورين حول العالم على دمج GitHub مع Vercel لما يوفره من سرعة، أمان، وتحديث تلقائي للمواقع.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- ميزة 1 -->
+                <div class="glass-card p-8 rounded-2xl relative overflow-hidden" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-14 h-14 rounded-xl bg-sky-500/20 flex items-center justify-center text-sky-400 text-2xl mb-6">
+                        <i class="fa-brands fa-github"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">حفظ الكود على GitHub</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        يعمل GitHub كخزنة سحابية لأكوادك. يحمي ملفاتك من الضياع، ويتيح لك تتبع كل تعديل تقوم به ومشاركته مع العالم.
+                    </p>
+                </div>
+
+                <!-- ميزة 2 -->
+                <div class="glass-card p-8 rounded-2xl relative overflow-hidden" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-14 h-14 rounded-xl bg-purple-500/20 flex items-center justify-center text-purple-400 text-2xl mb-6">
+                        <i class="fa-solid fa-bolt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">النشر التلقائي (CI/CD)</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        بمجرد ربط Vercel بـ GitHub، أي تعديل تقوم برفعه (Push) إلى GitHub سيظهر في موقعك المباشر خلال ثوانٍ دون أي تدخل يدوي!
+                    </p>
+                </div>
+
+                <!-- ميزة 3 -->
+                <div class="glass-card p-8 rounded-2xl relative overflow-hidden" data-aos="fade-up" data-aos-delay="300">
+                    <div class="w-14 h-14 rounded-xl bg-emerald-500/20 flex items-center justify-center text-emerald-400 text-2xl mb-6">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">مجاني + شهادة SSL</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        تحصل على رابط مجاني آمن يبدأ بـ <code>https://</code> مع سرعة فائقة بفضل شبكة الخوادم العالمية (CDN) الخاصة بـ Vercel.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- خطوات الشرح التفاعلية -->
+    <section id="steps" class="py-20 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <span class="text-sky-400 font-bold text-sm uppercase tracking-widest">الدليل العملي المصور</span>
+                <h2 class="text-3xl md:text-5xl font-black mt-2">كيف تستضيف موقعك في 4 خطوات؟</h2>
+            </div>
+
+            <!-- أزرار التبديل بين الخطوات -->
+            <div class="flex flex-wrap justify-center gap-4 mb-12" data-aos="fade-up">
+                <button onclick="showStep(1)" id="tab-1" class="step-tab bg-sky-500 text-slate-950 font-bold px-6 py-3 rounded-xl transition flex items-center gap-2">
+                    <span class="w-6 h-6 rounded-full bg-slate-950 text-sky-400 flex items-center justify-center text-xs">1</span>
+                    تجهيز المشروع
+                </button>
+                <button onclick="showStep(2)" id="tab-2" class="step-tab glass-card text-slate-300 font-bold px-6 py-3 rounded-xl transition flex items-center gap-2">
+                    <span class="w-6 h-6 rounded-full bg-slate-800 text-slate-300 flex items-center justify-center text-xs">2</span>
+                    إنشاء مستودع GitHub
+                </button>
+                <button onclick="showStep(3)" id="tab-3" class="step-tab glass-card text-slate-300 font-bold px-6 py-3 rounded-xl transition flex items-center gap-2">
+                    <span class="w-6 h-6 rounded-full bg-slate-800 text-slate-300 flex items-center justify-center text-xs">3</span>
+                    رفع الملفات (Push)
+                </button>
+                <button onclick="showStep(4)" id="tab-4" class="step-tab glass-card text-slate-300 font-bold px-6 py-3 rounded-xl transition flex items-center gap-2">
+                    <span class="w-6 h-6 rounded-full bg-slate-800 text-slate-300 flex items-center justify-center text-xs">4</span>
+                    الربط مع Vercel
+                </button>
+            </div>
+
+            <!-- محتوى الخطوات -->
+            <div class="glass-card rounded-3xl p-8 md:p-12 border border-white/10">
+                
+                <!-- الخطوة 1 -->
+                <div id="step-1" class="step-content grid md:grid-cols-2 gap-10 items-center">
+                    <div>
+                        <span class="text-sky-400 font-bold text-sm">الخطوة الأولى</span>
+                        <h3 class="text-2xl md:text-3xl font-black mt-2 mb-4">تجهيز ملفات موقعك (index.html)</h3>
+                        <p class="text-slate-300 leading-relaxed mb-6">
+                            قبل أي شيء، تأكد من أن ملف الصفحة الرئيسية لموقعك يحمل الاسم <code class="bg-slate-800 text-sky-300 px-2 py-1 rounded">index.html</code> لأن المتصفحات وخوادم الاستضافة تبحث عن هذا الملف تلقائياً عند فتح الرابط.
+                        </p>
+                        <ul class="space-y-3 text-sm text-slate-300 mb-6">
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-check-circle text-emerald-400"></i> ضع جميع ملفاتك (HTML, CSS, JS) في مجلد واحد.</li>
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-check-circle text-emerald-400"></i> تأكد من صحة مسارات الصور والملفات.</li>
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-check-circle text-emerald-400"></i> قم بتحميل برنامج <a href="https://git-scm.com/" target="_blank" class="text-sky-400 underline">Git</a> على جهازك إذا لم يكن مثبتاً.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=800&q=80" alt="تجهيز الكود" class="rounded-2xl shadow-2xl border border-white/10 w-full h-72 object-cover">
+                    </div>
+                </div>
+
+                <!-- الخطوة 2 -->
+                <div id="step-2" class="step-content hidden grid md:grid-cols-2 gap-10 items-center">
+                    <div>
+                        <span class="text-sky-400 font-bold text-sm">الخطوة الثانية</span>
+                        <h3 class="text-2xl md:text-3xl font-black mt-2 mb-4">إنشاء مستودع جديد على GitHub</h3>
+                        <p class="text-slate-300 leading-relaxed mb-6">
+                            ادخل إلى حسابك في GitHub وأنشئ مستودعاً جديداً (New Repository) ليكون الحاضن لملفات موقعك.
+                        </p>
+                        <ol class="space-y-4 text-sm text-slate-300 list-decimal list-inside mb-6">
+                            <li>افتح موقع <a href="https://github.com/new" target="_blank" class="text-sky-400 font-bold underline">github.com/new</a>.</li>
+                            <li>اكتب اسم المشروع في خانة <strong>Repository name</strong> (مثلاً: <code>nasrallah-website</code>).</li>
+                            <li>اجعل المستودع عاماً (Public) أو خاصاً (Private) كما تفضل.</li>
+                            <li>اضغط على الزر الأخضر <strong>Create repository</strong> بالأسفل.</li>
+                        </ol>
+                    </div>
+                    <div>
+                        <img src="https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?auto=format&fit=crop&w=800&q=80" alt="GitHub Repository" class="rounded-2xl shadow-2xl border border-white/10 w-full h-72 object-cover">
+                    </div>
+                </div>
+
+                <!-- الخطوة 3 -->
+                <div id="step-3" class="step-content hidden grid md:grid-cols-2 gap-10 items-center">
+                    <div>
+                        <span class="text-sky-400 font-bold text-sm">الخطوة الثالثة</span>
+                        <h3 class="text-2xl md:text-3xl font-black mt-2 mb-4">رفع الملفات عبر الأوامر أو المتصفح</h3>
+                        <p class="text-slate-300 leading-relaxed mb-4">
+                            يمكنك رفع الملفات مباشرة عبر المتصفح بالضغط على <strong>uploading an existing file</strong>، أو بالطريقة الاحترافية عبر موجه الأوامر (Terminal):
+                        </p>
+                        
+                        <div class="bg-slate-950 p-4 rounded-xl border border-white/10 relative font-mono text-xs text-left" dir="ltr">
+                            <button onclick="copyCommands()" id="copy-btn" class="absolute top-3 right-3 bg-sky-500/20 hover:bg-sky-500 text-sky-400 hover:text-slate-950 px-3 py-1 rounded text-xs transition font-cairo">
+                                <i class="fa-regular fa-copy"></i> نسخ الأوامر
+                            </button>
+                            <pre id="git-commands" class="text-emerald-400 leading-6 overflow-x-auto">git init
+git add .
+git commit -m "First commit by Nasrallah"
+git branch -M main
+git remote add origin https://github.com/username/repo.git
+git push -u origin main</pre>
+                        </div>
+                    </div>
+                    <div>
+                        <img src="https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&w=800&q=80" alt="Terminal Git Push" class="rounded-2xl shadow-2xl border border-white/10 w-full h-72 object-cover">
+                    </div>
+                </div>
+
+                <!-- الخطوة 4 -->
+                <div id="step-4" class="step-content hidden grid md:grid-cols-2 gap-10 items-center">
+                    <div>
+                        <span class="text-sky-400 font-bold text-sm">الخطوة الرابعة والأخيرة</span>
+                        <h3 class="text-2xl md:text-3xl font-black mt-2 mb-4">ربط المستودع بمنصة Vercel</h3>
+                        <p class="text-slate-300 leading-relaxed mb-6">
+                            الآن تأتي اللحظة الحاسمة لتحويل الكود إلى موقع حي يعمل على الإنترنت:
+                        </p>
+                        <ol class="space-y-3 text-sm text-slate-300 list-decimal list-inside mb-6">
+                            <li>توجه إلى موقع <a href="https://vercel.com" target="_blank" class="text-sky-400 font-bold underline">Vercel.com</a> وسجل الدخول باستخدام حسابك في <strong>GitHub</strong>.</li>
+                            <li>من لوحة التحكم اضغط على <strong>Add New...</strong> ثم اختر <strong>Project</strong>.</li>
+                            <li>ستظهر لك قائمة مشاريعك على GitHub، اضغط على زر <strong>Import</strong> بجانب مشروعك.</li>
+                            <li>اضغط على زر <strong>Deploy</strong> وانتظر بضع ثوانٍ.. ومبارك عليك موقعك الجديد! 🎉</li>
+                        </ol>
+                    </div>
+                    <div>
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80" alt="Vercel Dashboard" class="rounded-2xl shadow-2xl border border-white/10 w-full h-72 object-cover">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- المحاكي التفاعلي للنشر (Interactive Simulator) -->
+    <section id="simulator" class="py-16 px-6 bg-slate-900/60">
+        <div class="max-w-4xl mx-auto text-center" data-aos="zoom-in">
+            <span class="text-purple-400 font-bold text-sm">تجربة حية</span>
+            <h2 class="text-3xl font-black mt-2 mb-4">محاكي النشر التفاعلي (GitHub ➔ Vercel)</h2>
+            <p class="text-slate-400 mb-8 text-sm">اكتب اسم مشروعك واضغط على زر "ابدأ المحاكاة" لترى كيف يتفاعل Vercel مع GitHub لحظة بلحظة!</p>
+
+            <div class="glass-card p-6 md:p-8 rounded-2xl text-right border border-purple-500/30">
+                <div class="flex flex-col sm:flex-row gap-4 mb-6">
+                    <input type="text" id="project-name" placeholder="اكتب اسم مشروعك بالانجليزية (مثلا: nasrallah-portfolio)" class="flex-1 bg-slate-950 border border-white/15 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-sky-400 text-left" dir="ltr" value="nasrallah-dahman">
+                    <button onclick="runSimulation()" id="sim-btn" class="bg-gradient-to-r from-purple-600 to-sky-500 hover:opacity-90 text-white font-bold px-8 py-3 rounded-xl transition flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-play"></i> ابدأ المحاكاة
+                    </button>
+                </div>
+
+                <!-- شاشة التيرمينال -->
+                <div class="bg-black rounded-xl p-5 font-mono text-xs md:text-sm text-left h-64 overflow-y-auto border border-white/10" dir="ltr" id="terminal-screen">
+                    <div class="flex gap-2 mb-4 border-b border-white/10 pb-2">
+                        <span class="w-3 h-3 rounded-full bg-red-500"></span>
+                        <span class="w-3 h-3 rounded-full bg-yellow-500"></span>
+                        <span class="w-3 h-3 rounded-full bg-green-500"></span>
+                        <span class="text-slate-500 text-xs ml-2">bash - nasrallah@deployment:~</span>
+                    </div>
+                    <div id="terminal-output" class="space-y-2 text-slate-300">
+                        <p class="text-slate-500">// اضغط على "ابدأ المحاكاة" لتشغيل عملية الرفع والاستضافة...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم الأمثلة والروابط الهامة -->
+    <section id="links" class="py-20 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-black mb-4">الروابط الرسمية وأمثلة حية</h2>
+                <p class="text-slate-400">كل ما تحتاجه من روابط مباشرة للبدء فوراً بالإضافة إلى قوالب جاهزة للتجربة.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- رابط 1 -->
+                <a href="https://github.com/" target="_blank" class="glass-card p-6 rounded-2xl flex flex-col justify-between group" data-aos="fade-up" data-aos-delay="100">
+                    <div>
+                        <div class="flex justify-between items-center mb-4">
+                            <i class="fa-brands fa-github text-4xl text-white"></i>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-slate-500 group-hover:text-sky-400 transition"></i>
+                        </div>
+                        <h3 class="font-bold text-lg mb-2">منصة GitHub</h3>
+                        <p class="text-slate-400 text-xs leading-relaxed">الموقع الرسمي لإنشاء حسابك ورفع المستودعات البرمجية الخاصة بك.</p>
+                    </div>
+                    <span class="text-sky-400 text-xs font-bold mt-6 inline-block">github.com ➔</span>
+                </a>
+
+                <!-- رابط 2 -->
+                <a href="https://vercel.com/" target="_blank" class="glass-card p-6 rounded-2xl flex flex-col justify-between group" data-aos="fade-up" data-aos-delay="200">
+                    <div>
+                        <div class="flex justify-between items-center mb-4">
+                            <i class="fa-solid fa-triangle-exclamation rotate-180 text-4xl text-white"></i>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-slate-500 group-hover:text-sky-400 transition"></i>
+                        </div>
+                        <h3 class="font-bold text-lg mb-2">منصة Vercel</h3>
+                        <p class="text-slate-400 text-xs leading-relaxed">منصة الاستضافة السحابية لربط حسابك في GitHub ونشر المواقع مجاناً.</p>
+                    </div>
+                    <span class="text-sky-400 text-xs font-bold mt-6 inline-block">vercel.com ➔</span>
+                </a>
+
+                <!-- رابط 3 -->
+                <a href="https://vercel.com/templates" target="_blank" class="glass-card p-6 rounded-2xl flex flex-col justify-between group" data-aos="fade-up" data-aos-delay="300">
+                    <div>
+                        <div class="flex justify-between items-center mb-4">
+                            <i class="fa-solid fa-layer-group text-4xl text-purple-400"></i>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-slate-500 group-hover:text-sky-400 transition"></i>
+                        </div>
+                        <h3 class="font-bold text-lg mb-2">قوالب وأمثلة جاهزة</h3>
+                        <p class="text-slate-400 text-xs leading-relaxed">مكتبة رسمية من Vercel تحتوي على مئات المشاريع الجاهزة لنشرها بضغطة زر.</p>
+                    </div>
+                    <span class="text-purple-400 text-xs font-bold mt-6 inline-block">vercel.com/templates ➔</span>
+                </a>
+
+                <!-- رابط 4 -->
+                <a href="https://desktop.github.com/" target="_blank" class="glass-card p-6 rounded-2xl flex flex-col justify-between group" data-aos="fade-up" data-aos-delay="400">
+                    <div>
+                        <div class="flex justify-between items-center mb-4">
+                            <i class="fa-solid fa-desktop text-4xl text-emerald-400"></i>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-slate-500 group-hover:text-sky-400 transition"></i>
+                        </div>
+                        <h3 class="font-bold text-lg mb-2">GitHub Desktop</h3>
+                        <p class="text-slate-400 text-xs leading-relaxed">تطبيق رائع يغنيك عن كتابة الأوامر، يتيح لك رفع الملفات بواجهة رسومية سهلة.</p>
+                    </div>
+                    <span class="text-emerald-400 text-xs font-bold mt-6 inline-block">desktop.github.com ➔</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- تذييل الموقع (Footer) -->
+    <footer class="border-t border-white/10 py-10 px-6 text-center bg-slate-950">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-2 text-lg font-bold">
+                <i class="fa-solid fa-code text-sky-400"></i>
+                <span>نصر الله دهمان</span>
+            </div>
+            <p class="text-slate-400 text-sm">
+                تم التصميم والتطوير بكل حب بواسطة <strong class="text-white">نصر الله دهمان</strong> © 2026 - جميع الحقوق محفوظة.
+            </p>
+            <div class="flex gap-4 text-slate-400">
+                <a href="https://github.com" target="_blank" class="hover:text-sky-400 transition text-xl"><i class="fa-brands fa-github"></i></a>
+                <a href="https://linkedin.com" target="_blank" class="hover:text-sky-400 transition text-xl"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="https://twitter.com" target="_blank" class="hover:text-sky-400 transition text-xl"><i class="fa-brands fa-x-twitter"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // تفعيل مكتبة الحركات عند التمرير
+        AOS.init({
+            once: true,
+            offset: 50,
+        });
+
+        // وظيفة التبديل بين خطوات الشرح
+        function showStep(stepNumber) {
+            // إخفاء كل المحتويات
+            document.querySelectorAll('.step-content').forEach(el => {
+                el.classList.add('hidden');
+            });
+            // إعادة ضبط ألوان الأزرار
+            document.querySelectorAll('.step-tab').forEach(btn => {
+                btn.className = "step-tab glass-card text-slate-300 font-bold px-6 py-3 rounded-xl transition flex items-center gap-2";
+            });
+
+            // إظهار الخطوة المختارة
+            document.getElementById('step-' + stepNumber).classList.remove('hidden');
+            
+            // تمييز الزر النشط
+            const activeTab = document.getElementById('tab-' + stepNumber);
+            activeTab.className = "step-tab bg-sky-500 text-slate-950 font-bold px-6 py-3 rounded-xl transition flex items-center gap-2 shadow-lg shadow-sky-500/30";
+        }
+
+        // وظيفة نسخ أوامر Git
+        function copyCommands() {
+            const commands = document.getElementById('git-commands').innerText;
+            navigator.clipboard.writeText(commands);
+            const btn = document.getElementById('copy-btn');
+            btn.innerHTML = '<i class="fa-solid fa-check"></i> تم النسخ!';
+            btn.classList.add('bg-emerald-500', 'text-slate-950');
+            setTimeout(() => {
+                btn.innerHTML = '<i class="fa-regular fa-copy"></i> نسخ الأوامر';
+                btn.classList.remove('bg-emerald-500', 'text-slate-950');
+            }, 2500);
+        }
+
+        // وظيفة المحاكي التفاعلي
+        function runSimulation() {
+            const output = document.getElementById('terminal-output');
+            const btn = document.getElementById('sim-btn');
+            let projectName = document.getElementById('project-name').value.trim() || 'nasrallah-site';
+            projectName = projectName.toLowerCase().replace(/[^a-z0-9-]/g, '-');
+
+            btn.disabled = true;
+            btn.classList.add('opacity-50');
+            output.innerHTML = '';
+
+            const logs = [
+                { text: `$ git init`, color: 'text-white', delay: 300 },
+                { text: `Initialized empty Git repository in /Users/nasrallah/${projectName}/.git/`, color: 'text-slate-400', delay: 900 },
+                { text: `$ git add index.html`, color: 'text-white', delay: 1500 },
+                { text: `$ git commit -m "Deploy by Nasrallah Dahman"`, color: 'text-white', delay: 2200 },
+                { text: `[main (root-commit) 8f94a1b] Deploy by Nasrallah Dahman - 1 file changed`, color: 'text-emerald-400', delay: 2900 },
+                { text: `$ git push -u origin main`, color: 'text-white', delay: 3600 },
+                { text: `Uploading objects: 100% (3/3), done. pushed to github.com/nasrallah/${projectName}.git`, color: 'text-sky-400', delay: 4500 },
+                { text: `⚡ [Vercel Bot]: Detected push on GitHub repository "${projectName}"...`, color: 'text-purple-400', delay: 5400 },
+                { text: `⚡ [Vercel Build]: Building static files & optimizing assets...`, color: 'text-yellow-400', delay: 6400 },
+                { text: `✅ [Success]: Deployment completed! Your live website URL is:`, color: 'text-emerald-400 font-bold', delay: 7500 },
+                { text: `🔗 <a href="https://vercel.com" target="_blank" class="underline text-sky-300 font-bold">https://${projectName}.vercel.app</a> (تم الإنشاء بواسطة نصر الله دهمان 🎉)`, color: 'text-white', delay: 7800 }
+            ];
+
+            logs.forEach((log, index) => {
+                setTimeout(() => {
+                    const p = document.createElement('p');
+                    p.className = log.color;
+                    p.innerHTML = log.text;
+                    output.appendChild(p);
+                    const screen = document.getElementById('terminal-screen');
+                    screen.scrollTop = screen.scrollHeight;
+
+                    if (index === logs.length - 1) {
+                        btn.disabled = false;
+                        btn.classList.remove('opacity-50');
+                    }
+                }, log.delay);
+            });
+        }
+    </script>
+</body>
+</html>
+
